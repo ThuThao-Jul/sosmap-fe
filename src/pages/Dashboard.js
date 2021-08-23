@@ -1,4 +1,5 @@
 import React from "react";
+import LineChart from "../components/LineChart";
 import PieChart from "../components/PieChart";
 
 const DashboardPage = () => {
@@ -8,6 +9,7 @@ const DashboardPage = () => {
       <div className="App">
         Hi
         <PieChart></PieChart>
+        <LineChart></LineChart>
       </div>
     </>
   );
