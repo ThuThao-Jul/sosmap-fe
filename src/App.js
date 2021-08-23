@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Router, Switch } from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import DashboardPage from "./pages/Dashboard";
 import NotFoundPage from "./pages/NotFoundPage";
 
