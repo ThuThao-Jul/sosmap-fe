@@ -35,12 +35,9 @@ const PieChart = () => (
       <h1 className="title">Pie Chart</h1>
     </div>
 
-    <div style = {{width: "30vw", border: "1px solid black"}}>
-      <Pie
-        data={data}
-      />
+    <div style={{ width: "30vw", border: "1px solid black" }}>
+      <Pie data={data} />
     </div>
-
   </>
 );
 
