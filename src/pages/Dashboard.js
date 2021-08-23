@@ -1,4 +1,5 @@
 import React from "react";
+import BarChart from "../components/BarChart";
 import PieChart from "../components/PieChart";
 
 const DashboardPage = () => {
@@ -8,7 +9,11 @@ const DashboardPage = () => {
       <div className="App">
         Hi
         <PieChart></PieChart>
+        
       </div>
+
+      <BarChart></BarChart>
+
     </>
   );
 };

@@ -29,7 +29,8 @@ const data = {
   ],
 };
 
-const PieChart = () => (
+const PieChart = () => {
+  return (
   <>
     <div className="header">
       <h1 className="title">Pie Chart</h1>
@@ -42,6 +43,7 @@ const PieChart = () => (
     </div>
 
   </>
-);
+  )
+};
 
 export default PieChart;
