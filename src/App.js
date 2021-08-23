@@ -1,4 +1,3 @@
-import PieChart from "./PieChart";
 import "./App.css";
 import { Route, Router, Switch } from "react-router-dom";
 import DashboardPage from "./pages/Dashboard";
