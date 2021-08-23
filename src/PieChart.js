@@ -34,10 +34,13 @@ const PieChart = () => (
     <div className="header">
       <h1 className="title">Pie Chart</h1>
     </div>
-    <Pie
-      data={data}
-      style={{ border: "1px solid black", width: "50%", objectFit: "contain" }}
-    />
+
+    <div style = {{width: "30vw", border: "1px solid black"}}>
+      <Pie
+        data={data}
+      />
+    </div>
+
   </>
 );
 
