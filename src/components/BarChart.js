@@ -8,11 +8,11 @@ const BarChart = () => {
     const [ticket, setTicket] = useState([]);
     let districtData = [] ;
 
-    for (let i=0; i<=9; i++) {
-       let district = "quận " + `${i+1}`;
-       let notProcessed = ticket.filter((ticket) => ticket.status === 'not processed' && ticket.district === "quận " + `${i+1}`).length;
-       let inProgress = ticket.filter((ticket) => ticket.status === 'in progress' && ticket.district === "quận " + `${i+1}`).length;
-       let done = ticket.filter((ticket) => ticket.status === 'done' && ticket.district === "quận " + `${i+1}`).length;
+    for (let i=1; i<=10; i++) {
+       let district = "quận " + i;
+       let notProcessed = ticket.filter((ticket) => ticket.status === 'not processed' && ticket.district === "quận " + i).length;
+       let inProgress = ticket.filter((ticket) => ticket.status === 'in progress' && ticket.district === "quận " + i).length;
+       let done = ticket.filter((ticket) => ticket.status === 'done' && ticket.district === "quận " + i).length;
        let detailData = {"district": district, "notProcessed": notProcessed, "inProgress": inProgress, "done": done};
        districtData.push(detailData);
     }
@@ -62,10 +62,6 @@ const BarChart = () => {
     </div>
     </>
     )
-
-      
-  
-    
 }
 
 export default BarChart
