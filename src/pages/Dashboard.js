@@ -1,5 +1,6 @@
 import React from "react";
 import PieChart from "../components/PieChart";
+import PieChartStatus from "../components/PieChartStatus";
 
 const DashboardPage = () => {
   return (
@@ -8,6 +9,7 @@ const DashboardPage = () => {
       <div className="App">
         Hi
         <PieChart></PieChart>
+        <PieChartStatus></PieChartStatus>
       </div>
     </>
   );
