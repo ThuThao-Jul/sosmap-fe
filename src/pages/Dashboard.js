@@ -10,13 +10,7 @@ import {
   BarChartOutlined,
 } from "@ant-design/icons";
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-  useRouteMatch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import "antd/dist/antd.css";
 import BarChart from "../components/BarChart";
 import LineChart from "../components/LineChart";

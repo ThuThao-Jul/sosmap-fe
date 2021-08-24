@@ -2,43 +2,62 @@ import React, { useEffect, useState } from "react";
 import api from "../redux/axios";
 import { Pie } from "react-chartjs-2";
 
-
 const PieChart = () => {
-  const [tickets, setTickets] = useState([]) 
-  const [eggs, setEgg] = useState(0)
-  const [noodle, setNoodle] = useState(0)
-  const [cloth, setCloth] = useState(0)
-  const [oil, setOil] = useState(0)
+  const [tickets, setTickets] = useState([]);
+  const [eggs, setEgg] = useState(0);
+  const [noodle, setNoodle] = useState(0);
+  const [cloth, setCloth] = useState(0);
+  const [oil, setOil] = useState(0);
 
   const getTickets = async () => {
     try {
       const res = await api.get("/ticket");
       const tickets = res.data.data;
-      setTickets(tickets)
-      let sumeggs = 0
-      const egg = tickets.map((t) => t.items.map((i) => i.name == "Trứng" && i.type =="receive" && i.quantity > 0 ? sumeggs += i.quantity : sumeggs += 0));
-      setEgg(sumeggs)
+      setTickets(tickets);
+      let sumeggs = 0;
+      const egg = tickets.map((t) =>
+        t.items.map((i) =>
+          i.name == "Trứng" && i.quantity > 0
+            ? (sumeggs += i.quantity)
+            : (sumeggs += 0)
+        )
+      );
+      setEgg(sumeggs);
 
-      let sumNoodle = 0
-      const noodle = tickets.map((t) => t.items.map((i) => i.name == "Mì Gói" && i.type =="receive" && i.quantity > 0 ? sumNoodle  += i.quantity : sumNoodle += 0));
-      setNoodle(sumNoodle)
+      let sumNoodle = 0;
+      const noodle = tickets.map((t) =>
+        t.items.map((i) =>
+          i.name == "Mì Gói" && i.quantity > 0
+            ? (sumNoodle += i.quantity)
+            : (sumNoodle += 0)
+        )
+      );
+      setNoodle(sumNoodle);
 
-      let sumOil = 0
-      const oil = tickets.map((t) => t.items.map((i) => i.name == "Dầu Ăn" && i.type =="receive" && i.quantity > 0 ? sumOil  += i.quantity : sumOil += 0));
-      setOil(sumOil)
-      
-      let sumCloth = 0
-      const cloth = tickets.map((t) => t.items.map((i) => i.name == "Quần Áo" && i.type =="receive" && i.quantity ? sumCloth  += i.quantity : sumCloth += 0));
-      setCloth(sumCloth)
-      
+      let sumOil = 0;
+      const oil = tickets.map((t) =>
+        t.items.map((i) =>
+          i.name == "Dầu Ăn" && i.quantity > 0
+            ? (sumOil += i.quantity)
+            : (sumOil += 0)
+        )
+      );
+      setOil(sumOil);
+
+      let sumCloth = 0;
+      const cloth = tickets.map((t) =>
+        t.items.map((i) =>
+          i.name == "Quần Áo" && i.quantity
+            ? (sumCloth += i.quantity)
+            : (sumCloth += 0)
+        )
+      );
+      setCloth(sumCloth);
     } catch (error) {
-      console.log("Error", error)
+      console.log("Error", error);
     }
   };
-  useEffect(() => 
-    getTickets()
-  , [])
-
+  useEffect(() => getTickets(), []);
 
   const data = {
     labels: ["Mì Gói", "Trứng", "Dầu Ăn", "Quần Áo"],
@@ -67,19 +86,17 @@ const PieChart = () => {
     ],
   };
 
-
-
   return (
-  <>
-    <div className="header">
-      <h1 className="title">Pie Chart</h1>
-    </div>
+    <>
+      <div className="header">
+        <h1 className="title">Pie Chart</h1>
+      </div>
 
-    <div style={{ width: "30vw", border: "1px solid black" }}>
-      <Pie data={data} />
-    </div>
-  </>
-  )
+      <div style={{ width: "30vw", border: "1px solid black" }}>
+        <Pie data={data} />
+      </div>
+    </>
+  );
 };
 
 export default PieChart;
