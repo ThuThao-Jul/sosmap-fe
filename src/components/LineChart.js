@@ -1,10 +1,73 @@
+import { Table } from "antd";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { Row, Col, Container } from "react-bootstrap";
 import { Line } from "react-chartjs-2";
 import api from "../redux/axios";
 
 const LineChart = () => {
   const [tickets, setTickets] = useState([]);
+  const columns = [
+    {
+      title: "Date",
+      dataIndex: "date",
+    },
+    {
+      title: "Not Processed",
+      dataIndex: "notprocessed",
+      sorter: {
+        compare: (a, b) => a.chinese - b.chinese,
+        multiple: 1,
+      },
+    },
+    {
+      title: "In Progress",
+      dataIndex: "inprogress",
+      sorter: {
+        compare: (a, b) => a.math - b.math,
+        multiple: 1,
+      },
+    },
+    {
+      title: "Done",
+      dataIndex: "done",
+      sorter: {
+        compare: (a, b) => a.english - b.english,
+        multiple: 1,
+      },
+    },
+  ];
+
+  const tableData = [
+    {
+      key: "1",
+      name: "John Brown",
+      chinese: 98,
+      math: 60,
+      english: 70,
+    },
+    {
+      key: "2",
+      name: "Jim Green",
+      chinese: 98,
+      math: 66,
+      english: 89,
+    },
+    {
+      key: "3",
+      name: "Joe Black",
+      chinese: 98,
+      math: 90,
+      english: 70,
+    },
+    {
+      key: "4",
+      name: "Jim Red",
+      chinese: 88,
+      math: 99,
+      english: 89,
+    },
+  ];
   const [notProcessed, setNotProcessed] = useState({
     monday: 0,
     tuesday: 0,
@@ -54,22 +117,8 @@ const LineChart = () => {
           notProcessed.saturday,
           notProcessed.sunday,
         ],
-        backgroundColor: [
-          "#F7464A",
-          `rgba(0, 148, 247, 0.7)`,
-          "rgba(247, 222, 0, 0.7)",
-          `#46BFBD`,
-          "rgba(153, 102, 255, 0.7)",
-          "rgba(255, 159, 64, 0.7)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
+        backgroundColor: ["#F7464A"],
+        borderColor: ["#F7464A"],
         borderWidth: 1,
       },
       {
@@ -83,22 +132,8 @@ const LineChart = () => {
           inProgress.saturday,
           inProgress.sunday,
         ],
-        backgroundColor: [
-          "#F7464A",
-          `rgba(0, 148, 247, 0.7)`,
-          "rgba(247, 222, 0, 0.7)",
-          `#46BFBD`,
-          "rgba(153, 102, 255, 0.7)",
-          "rgba(255, 159, 64, 0.7)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
+        backgroundColor: ["rgba(255, 208, 0, 1)"],
+        borderColor: ["rgba(255, 208, 0, 1)"],
         borderWidth: 1,
       },
       {
@@ -112,26 +147,15 @@ const LineChart = () => {
           done.saturday,
           done.sunday,
         ],
-        backgroundColor: [
-          "#F7464A",
-          `rgba(0, 148, 247, 0.7)`,
-          "rgba(247, 222, 0, 0.7)",
-          `#46BFBD`,
-          "rgba(153, 102, 255, 0.7)",
-          "rgba(255, 159, 64, 0.7)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
+        backgroundColor: ["#46BFBD"],
+        borderColor: ["#46BFBD"],
         borderWidth: 1,
       },
     ],
   };
+  function onChange(pagination, filters, sorter, extra) {
+    console.log("params", pagination, filters, sorter, extra);
+  }
   const getTickets = async () => {
     const res = await api.get("/ticket");
     const tickets = res.data.data;
@@ -264,13 +288,37 @@ const LineChart = () => {
   console.log(notProcessed);
   return (
     <>
-      <div className="header">
-        <h1 className="title">Pie Chart</h1>
-      </div>
-
-      <div style={{ width: "50vw", border: "1px solid black" }}>
-        <Line data={data} />
-      </div>
+      <Container
+        style={{
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+        }}
+      >
+        <div
+          className="header"
+          style={{ textAlign: "center", marginBottom: "40px" }}
+        >
+          <h1 className="title">Tickets Requested Per Date</h1>
+        </div>
+        <Row style={{ width: "100%" }}>
+          <Col lg={4}>
+            {" "}
+            <Table
+              columns={columns}
+              dataSource={tableData}
+              pagination={false}
+              onChange={onChange}
+            />{" "}
+          </Col>
+          <Col lg={8}>
+            <div className="header" style={{ border: "1px solid black" }}>
+              <Line data={data} />
+            </div>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };
