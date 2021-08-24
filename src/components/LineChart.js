@@ -4,7 +4,7 @@ import { Line } from "react-chartjs-2";
 import api from "../redux/axios";
 
 const LineChart = () => {
-  const [tickets, setTickets] = useState(0);
+  const [tickets, setTickets] = useState([]);
   const [notProcessed, setNotProcessed] = useState({
     monday: 0,
     tuesday: 0,
