@@ -3,10 +3,13 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Container } from "react-bootstrap";
 import { Line } from "react-chartjs-2";
+import { useDispatch, useSelector } from "react-redux";
+import { ticketActions } from "../redux/actions/ticket.action";
 import api from "../redux/axios";
 
 const LineChart = () => {
-  const [tickets, setTickets] = useState([]);
+  const tickets = useSelector((state) => state.tickets.data);
+  const dispatch = useDispatch();
   const [notProcessed, setNotProcessed] = useState({
     monday: 0,
     tuesday: 0,
@@ -145,10 +148,7 @@ const LineChart = () => {
   function onChange(pagination, filters, sorter, extra) {
     console.log("params", pagination, filters, sorter, extra);
   }
-  const getTickets = async () => {
-    const res = await api.get("/ticket");
-    const tickets = res.data.data;
-    setTickets(tickets);
+  const getTickets = () => {
     const doneDate = {
       monday: 0,
       tuesday: 0,
@@ -269,6 +269,7 @@ const LineChart = () => {
     setDone(doneDate);
   };
   useEffect(() => {
+    dispatch(ticketActions.getTickets());
     getTickets();
   }, []);
   console.log(tickets);
