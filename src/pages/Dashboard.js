@@ -6,6 +6,7 @@ import {
   FileOutlined,
   TeamOutlined,
   UserOutlined,
+  OrderedListOutlined,
   BarChartOutlined,
 } from "@ant-design/icons";
 import React, { useState } from "react";
@@ -31,7 +32,6 @@ const DashboardPage = () => {
   const onCollapse = () => {
     setCollapsed(!collapsed);
   };
-  let match = useRouteMatch();
   return (
     <Router>
       <Layout style={{ minHeight: "100vh" }}>
@@ -49,10 +49,14 @@ const DashboardPage = () => {
             Dashboard
           </h1>
           <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-            <Menu.Item key="1" icon={<PieChartOutlined />}>
-              <Link to="ticketsList"> Tickets List </Link>
-            </Menu.Item>
             <SubMenu key="sub1" icon={<PieChartOutlined />} title="Charts">
+              <Menu.Item
+                key="1"
+                icon={<OrderedListOutlined />}
+                style={{ paddingLeft: "32px", fontSize: "12px" }}
+              >
+                <Link to="ticketsList"> Tickets List </Link>
+              </Menu.Item>
               <Menu.Item
                 style={{ paddingLeft: "32px", fontSize: "12px" }}
                 icon={<PieChartOutlined />}
