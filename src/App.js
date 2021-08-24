@@ -1,6 +1,8 @@
 import "./App.css";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import DashboardPage from "./pages/Dashboard";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 function App() {
   return (
