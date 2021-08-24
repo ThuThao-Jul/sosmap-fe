@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../redux/axios";
 import { Bar } from "react-chartjs-2";
-import { Checkbox, Divider } from 'antd';
+import { Checkbox, Divider, Table } from 'antd';
 const CheckboxGroup = Checkbox.Group;
 
 
@@ -27,26 +27,26 @@ const BarChart = () => {
 
     const checkedData = districtData.filter((i) => checkedList.includes(i.district))
     console.log(checkedData)
-    const data = {
+    const dataBar = {
         labels: checkedList,
         datasets: [{
           type: 'bar',
           label: 'Not processed',
           data: checkedData.map((d) =>  d.notProcessed),
           borderColor: 'rgb(255, 99, 132)',
-          backgroundColor: '#FF6767'
+          backgroundColor: '#F7464A'
         }, {
           type: 'bar',
           label: 'In progress',
           data: checkedData.map((d) => d.inProgress),
           borderColor: 'rgb(255, 99, 132)',
-          backgroundColor: '#96BAFF'
+          backgroundColor: 'rgba(255, 230, 0, 0.644)'
         },{
             type: 'bar',
             label: 'Done',
             data: checkedData.map((d) => d.done),
             borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: '#7FC8A9' 
+            backgroundColor: '#46BFBD' 
         }]
       };
       
@@ -72,6 +72,93 @@ const BarChart = () => {
     useEffect(() => {
         getTickets()
     },[])
+
+
+    const columns = [
+      {
+        title: 'Status',
+        dataIndex: 'status',
+        key: 'status',
+        width: 80,
+        fixed: 'left',
+        filters: [
+          {
+            text: 'Not processed',
+            value: 'not processed',
+          },
+          {
+            text: 'In progress',
+            value: 'in progress',
+          },
+          {
+            text: 'Done',
+            value: 'done,'
+          }
+        ],
+        onFilter: (value, record) => record.status.indexOf(value) === 0,
+      },
+      {
+        title: 'Priority',
+        dataIndex: 'priority',
+        key: 'priority',
+        width: 60,
+        filters: [
+          {
+            text: 'Low',
+            value: 'low',
+          },
+          {
+            text: 'Medium',
+            value: 'medium',
+          },
+          {
+            text: 'High',
+            value: 'high',
+          }
+        ],
+        onFilter: (value, record) => record.priority.indexOf(value) === 0,
+      },
+      {
+        title: 'Name',
+        dataIndex: 'name',
+        key: 'name',
+        width: 60,
+      },
+      {
+        title: 'Phone number',
+        dataIndex: 'phone',
+        key: 'phone',
+        width: 100,
+      },
+      {
+        title: 'Address',
+        dataIndex: 'address',
+        key: 'address',
+        width: 100,
+      },
+      {
+        title: 'District',
+        dataIndex: 'district',
+        key: 'district',
+        width: 60,
+        sorter: (a, b) => a.district.split(" ")[1] - b.district.split(" ")[1],
+        fixed: 'right',
+      },
+    ];
+
+    const data = [];
+    for (let i = 0; i < ticket.length; i++) {
+      data.push({
+        key: ticket[i]._id,
+        status: ticket[i].status,
+        priority: ticket[i].priority,
+        name: ticket[i].name,
+        phone: ticket[i].phoneNumber,
+        address: ticket[i].address,
+        district: ticket[i].district,
+      });
+    }
+
     
     return (
     <>
@@ -80,7 +167,7 @@ const BarChart = () => {
     </div>
 
  {/* Customized districts */}
-  <div style={{border: "1px solid green", margin:"2%", width:"80%"}}>
+  <div style={{border: "1px solid green", margin:"2%", width:"80%", textAlign:"center"}}>
  <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
         Check all
       </Checkbox>
@@ -88,11 +175,21 @@ const BarChart = () => {
       <CheckboxGroup options={plainOptions} value={checkedList} onChange={onChange} />
   </div>
 
-    <div style={{ width:"100%", border: "1px solid black" }}>
+    <div style={{ width:"100%", border: "1px solid black", marginBottom:"5%", marginTop:"3%"}}>
      
 
-      <Bar data={data} />
+      <Bar data={dataBar} />
+
     </div>
+
+      {/* Table */}
+      <Table
+    columns={columns}
+    dataSource={data}
+    bordered
+    size="middle"
+    scroll={{ x: 'calc(700px + 50%)', y: 240 }}
+  />
     </>
     )
 }

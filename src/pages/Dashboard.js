@@ -1,11 +1,8 @@
-import { Layout, Menu, Breadcrumb } from "antd";
+import { Layout, Menu} from "antd";
 import {
-  DesktopOutlined,
   PieChartOutlined,
   LineChartOutlined,
-  FileOutlined,
   TeamOutlined,
-  UserOutlined,
   BarChartOutlined,
 } from "@ant-design/icons";
 import React, { useState } from "react";
@@ -14,14 +11,12 @@ import {
   Route,
   Link,
   Switch,
-  useRouteMatch,
 } from "react-router-dom";
 import "antd/dist/antd.css";
 import BarChart from "../components/BarChart";
 import LineChart from "../components/LineChart";
 import PieChart from "../components/PieChart";
 import PieChartStatus from "../components/PieChartStatus";
-import NotFoundPage from "./NotFoundPage";
 import TicketsList from "../components/TicketsList";
 const { Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -31,7 +26,6 @@ const DashboardPage = () => {
   const onCollapse = () => {
     setCollapsed(!collapsed);
   };
-  let match = useRouteMatch();
   return (
     <Router>
       <Layout style={{ minHeight: "100vh" }}>
@@ -92,6 +86,7 @@ const DashboardPage = () => {
               style={{
                 padding: 24,
                 minHeight: 360,
+                height:"100%",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
