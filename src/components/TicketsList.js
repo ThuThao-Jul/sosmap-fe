@@ -1,33 +1,24 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import api from "../redux/axios";
 import { Card, Col, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Divider, Tag, Select, Button } from "antd";
 import tagRender from "./TagRender";
+import { useDispatch, useSelector } from "react-redux";
+import { ticketActions } from "../redux/actions/ticket.action";
 
 const optionsStatus = [{ value: 'gold', label: 'NOT PROCESSED' }, { value: 'lime', label: 'IN PROGRESS' }, { value: 'green', label: 'DONE' }];
 const optionsPriority = [{ value: 'gold', label: 'HIGH' }, { value: 'lime', label: 'MEDIUM' }, { value: 'green', label: 'LOW' }];
 const { Option } = Select;
 
+
 const TicketsList = () => {
-  const [ticketList, setTicketList] = useState();
+  const ticketList = useSelector((state) => state.tickets.data);
   const [filter, setFilter] = useState({"status": [], "priority": [], "area": []});
   const [dataFilter, setDataFilter] = useState([]);
- 
-  
+  const dispatch = useDispatch();
   useEffect(() => {
-    const ticketDetail = async () => {
-      try {
-        const res = await api.get("/ticket");
-        const data = res.data.data;
-        console.log("Ticket:", data);
-        setTicketList(data);
-      } catch (error) {
-        console.log("Error:", error);
-      }
-    };
-    ticketDetail();
+    dispatch(ticketActions.getTickets());
   }, []);
 
   const children = [];
@@ -36,7 +27,6 @@ const TicketsList = () => {
   }
 
   const handleChange = (value) => {
-  // console.log(`selected ${value}`);
   setFilter({...filter, "area": value})
   }
 

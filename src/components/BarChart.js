@@ -3,10 +3,12 @@ import api from "../redux/axios";
 import { Bar } from "react-chartjs-2";
 import { Checkbox, Divider, Table } from "antd";
 import "antd/dist/antd.css";
+import { useDispatch, useSelector } from "react-redux";
+import { ticketActions } from "../redux/actions/ticket.action";
 const CheckboxGroup = Checkbox.Group;
 
 const BarChart = () => {
-  const [ticket, setTicket] = useState([]);
+  const ticket = useSelector((state) => state.tickets.data);
   let districtData = [];
 
   for (let i = 1; i <= 10; i++) {
@@ -80,13 +82,9 @@ const BarChart = () => {
     setCheckAll(e.target.checked);
   };
 
-  const getTickets = async () => {
-    const res = await api.get("http://localhost:5000/api/ticket");
-    setTicket(res.data.data);
-  };
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    getTickets();
+    dispatch(ticketActions.getTickets());
   }, []);
 
   const columns = [
@@ -181,7 +179,6 @@ const BarChart = () => {
       </div>
 
       {/* Customized districts */}
-      
 
       <div
         style={{
@@ -201,7 +198,9 @@ const BarChart = () => {
           width: "80%",
           textAlign: "center",
         }}
-      > Filter by:
+      >
+        {" "}
+        Filter by:
         <Checkbox
           indeterminate={indeterminate}
           onChange={onCheckAllChange}
@@ -215,7 +214,6 @@ const BarChart = () => {
           value={checkedList}
           onChange={onChange}
         />
-
       </div>
       {/* Table */}
       <Table
