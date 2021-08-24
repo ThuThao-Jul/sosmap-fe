@@ -4,20 +4,14 @@ import api from "../redux/axios";
 import { Card, Col, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Divider, Tag } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { ticketActions } from "../redux/actions/ticket.action";
 
 const TicketsList = () => {
-  const [ticketList, setTicketList] = useState();
+  const ticketList = useSelector((state) => state.tickets.data);
+  const dispatch = useDispatch();
   useEffect(() => {
-    const ticketDetail = async () => {
-      try {
-        const res = await api.get("/ticket");
-        const data = res.data.data;
-        setTicketList(data);
-      } catch (error) {
-        console.log("Error:", error);
-      }
-    };
-    ticketDetail();
+    dispatch(ticketActions.getTickets());
   }, []);
   return (
     <Row>
