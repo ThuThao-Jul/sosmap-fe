@@ -12,7 +12,6 @@ const TicketsList = () => {
       try {
         const res = await api.get("/ticket");
         const data = res.data.data;
-        console.log("Ticket:", data);
         setTicketList(data);
       } catch (error) {
         console.log("Error:", error);
