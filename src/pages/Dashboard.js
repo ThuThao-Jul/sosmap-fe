@@ -3,6 +3,8 @@ import {
   PieChartOutlined,
   LineChartOutlined,
   TeamOutlined,
+  UserOutlined,
+  OrderedListOutlined,
   BarChartOutlined,
 } from "@ant-design/icons";
 import React, { useState } from "react";
@@ -43,10 +45,14 @@ const DashboardPage = () => {
             Dashboard
           </h1>
           <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-            <Menu.Item key="1" icon={<PieChartOutlined />}>
-              <Link to="ticketsList"> Tickets List </Link>
-            </Menu.Item>
             <SubMenu key="sub1" icon={<PieChartOutlined />} title="Charts">
+              <Menu.Item
+                key="1"
+                icon={<OrderedListOutlined />}
+                style={{ paddingLeft: "32px", fontSize: "12px" }}
+              >
+                <Link to="ticketsList"> Tickets List </Link>
+              </Menu.Item>
               <Menu.Item
                 style={{ paddingLeft: "32px", fontSize: "12px" }}
                 icon={<PieChartOutlined />}
@@ -86,7 +92,7 @@ const DashboardPage = () => {
               style={{
                 padding: 24,
                 minHeight: 360,
-                height:"100%",
+                height: "100%",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -95,7 +101,7 @@ const DashboardPage = () => {
               <Switch>
                 <Route exact path="/ticketsList" component={TicketsList} />
                 <Route exact path="/itemsType" component={PieChart} />
-                <Route exact path="/ticketsDistrict" component={BarChart}/>
+                <Route exact path="/ticketsDistrict" component={BarChart} />
                 <Route exact path="/ticketsStatus" component={PieChartStatus} />
                 <Route exact path="/ticketsDate" component={LineChart} />
                 {/* <Route component={NotFoundPage} /> */}
