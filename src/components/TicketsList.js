@@ -29,31 +29,31 @@ const TicketsList = () => {
                 <Card.Title>
                   {index + 1}: {t.name}
                 </Card.Title>
-                <Card.Text>Địa Chỉ: {t.address}</Card.Text>
-                <Card.Text>Khu vực: {t.district}</Card.Text>
+                <Card.Text>Address: {t.address}</Card.Text>
+                <Card.Text>Area: {t.district}</Card.Text>
                 <Card.Text>
-                  Đồ cần nhận:
+                  In need:
                   {t.items.map((items) => (
                     <li>
                       {items.name}:{" "}
                       {items.name === "Mì Gói" ? (
-                        <span>{items.quantity + " thùng"}</span>
+                        <span>{items.quantity + " box"}</span>
                       ) : items.name === "Trứng" ? (
-                        <span>{items.quantity + " vỉ"}</span>
+                        <span>{items.quantity + " blister"}</span>
                       ) : items.name === "Gạo" ? (
                         <span>{items.quantity + " kg"}</span>
                       ) : items.name === "Sữa" ? (
-                        <span>{items.quantity + " lốc"}</span>
+                        <span>{items.quantity + " package"}</span>
                       ) : items.name === "Quần Áo" ? (
-                        <span>{items.quantity + " bộ"}</span>
+                        <span>{items.quantity + " set"}</span>
                       ) : (
-                        <span>{items.quantity + " chai"}</span>
+                        <span>{items.quantity + " bottle"}</span>
                       )}
                     </li>
                   ))}
                 </Card.Text>
-                <Card.Text>Độ ưu tiên: {t.priority}</Card.Text>
-                <Card.Text>Tình trạng: {t.status}</Card.Text>
+                <Card.Text>Priority: {t.priority}</Card.Text>
+                <Card.Text>Status: {t.status}</Card.Text>
               </Card.Body>
             </Card>
           </div>
