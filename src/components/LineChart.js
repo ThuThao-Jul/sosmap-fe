@@ -1,5 +1,7 @@
+import { Col, Row, Table } from "antd";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { Container } from "react-bootstrap";
 import { Line } from "react-chartjs-2";
 import api from "../redux/axios";
 
@@ -32,16 +34,66 @@ const LineChart = () => {
     saturday: 0,
     sunday: 0,
   });
+  const columns = [
+    {
+      title: "Date",
+      dataIndex: "date",
+      align: "center",
+    },
+    {
+      title: "Not Processed",
+      dataIndex: "notprocessed",
+      align: "center",
+      width: "20px",
+      sorter: {
+        compare: (a, b) => a.notprocessed - b.notprocessed,
+        multiple: 1,
+      },
+    },
+    {
+      title: "In Progress",
+      dataIndex: "inprogress",
+      align: "center",
+      width: "10px",
+
+      sorter: {
+        compare: (a, b) => a.inprogress - b.inprogress,
+        multiple: 1,
+      },
+    },
+    {
+      title: "Done",
+      dataIndex: "done",
+      align: "center",
+      sorter: {
+        compare: (a, b) => a.done - b.done,
+        multiple: 1,
+      },
+    },
+  ];
+  const dateArray = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  const tableArray = ["1", "2", "3", "4", "5", "6", "7"];
+  const tableData = tableArray.map((data, idx) => {
+    let result = {
+      key: data,
+      date: dateArray[idx],
+      notprocessed: notProcessed[dateArray[idx].toLowerCase()],
+      inprogress: inProgress[dateArray[idx].toLowerCase()],
+      done: done[dateArray[idx].toLowerCase()],
+    };
+    return result;
+  });
+
   const data = {
-    labels: [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ],
+    labels: dateArray,
     datasets: [
       {
         label: "Not Processed",
@@ -54,22 +106,8 @@ const LineChart = () => {
           notProcessed.saturday,
           notProcessed.sunday,
         ],
-        backgroundColor: [
-          "#F7464A",
-          `rgba(0, 148, 247, 0.7)`,
-          "rgba(247, 222, 0, 0.7)",
-          `#46BFBD`,
-          "rgba(153, 102, 255, 0.7)",
-          "rgba(255, 159, 64, 0.7)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
+        backgroundColor: ["#F7464A"],
+        borderColor: ["#F7464A"],
         borderWidth: 1,
       },
       {
@@ -83,22 +121,8 @@ const LineChart = () => {
           inProgress.saturday,
           inProgress.sunday,
         ],
-        backgroundColor: [
-          "#F7464A",
-          `rgba(0, 148, 247, 0.7)`,
-          "rgba(247, 222, 0, 0.7)",
-          `#46BFBD`,
-          "rgba(153, 102, 255, 0.7)",
-          "rgba(255, 159, 64, 0.7)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
+        backgroundColor: ["rgba(255, 208, 0, 1)"],
+        borderColor: ["rgba(255, 208, 0, 1)"],
         borderWidth: 1,
       },
       {
@@ -112,26 +136,15 @@ const LineChart = () => {
           done.saturday,
           done.sunday,
         ],
-        backgroundColor: [
-          "#F7464A",
-          `rgba(0, 148, 247, 0.7)`,
-          "rgba(247, 222, 0, 0.7)",
-          `#46BFBD`,
-          "rgba(153, 102, 255, 0.7)",
-          "rgba(255, 159, 64, 0.7)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
+        backgroundColor: ["#46BFBD"],
+        borderColor: ["#46BFBD"],
         borderWidth: 1,
       },
     ],
   };
+  function onChange(pagination, filters, sorter, extra) {
+    console.log("params", pagination, filters, sorter, extra);
+  }
   const getTickets = async () => {
     const res = await api.get("/ticket");
     const tickets = res.data.data;
@@ -264,13 +277,38 @@ const LineChart = () => {
   console.log(notProcessed);
   return (
     <>
-      <div className="header">
-        <h1 className="title">Pie Chart</h1>
-      </div>
-
-      <div style={{ width: "50vw", border: "1px solid black" }}>
-        <Line data={data} />
-      </div>
+      <Container
+        style={{
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+        }}
+      >
+        <div
+          className="header"
+          style={{ textAlign: "center", marginBottom: "40px" }}
+        >
+          <h1 className="title">Tickets Requested Per Date</h1>
+        </div>
+        <Row style={{ width: "100%" }}>
+          <Col lg={8} style={{ display: "flex", alignItems: "center" }}>
+            <Table
+              size={"small"}
+              columns={columns}
+              dataSource={tableData}
+              pagination={false}
+              onChange={onChange}
+            />
+          </Col>
+          <Col md={0} lg={1}></Col>
+          <Col lg={15}>
+            <div className="header" style={{ border: "1px solid black" }}>
+              <Line responsive={true} data={data} />
+            </div>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };
