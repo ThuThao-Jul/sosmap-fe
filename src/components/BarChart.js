@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../redux/axios";
 import { Bar } from "react-chartjs-2";
 import { Checkbox, Divider, Table } from 'antd';
+import "antd/dist/antd.css";
 const CheckboxGroup = Checkbox.Group;
 
 
