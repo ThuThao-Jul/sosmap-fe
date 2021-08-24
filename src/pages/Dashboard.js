@@ -22,6 +22,7 @@ import LineChart from "../components/LineChart";
 import PieChart from "../components/PieChart";
 import PieChartStatus from "../components/PieChartStatus";
 import NotFoundPage from "./NotFoundPage";
+import TicketsList from "../components/TicketsList";
 const { Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -38,6 +39,7 @@ const DashboardPage = () => {
           <h1
             className="logo"
             style={{
+              visibility: collapsed ? "hidden" : "visible",
               color: "white",
               fontSize: "24px",
               textAlign: "center",
@@ -48,7 +50,7 @@ const DashboardPage = () => {
           </h1>
           <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
             <Menu.Item key="1" icon={<PieChartOutlined />}>
-              Option 1
+              <Link to="ticketsList"> Tickets List </Link>
             </Menu.Item>
             <SubMenu key="sub1" icon={<PieChartOutlined />} title="Charts">
               <Menu.Item
@@ -81,17 +83,10 @@ const DashboardPage = () => {
               </Menu.Item>
             </SubMenu>
             <SubMenu key="sub2" icon={<TeamOutlined />} title="Team"></SubMenu>
-            <Menu.Item key="9" icon={<FileOutlined />}>
-              Files
-            </Menu.Item>
           </Menu>
         </Sider>
         <Layout className="site-layout">
           <Content style={{ margin: "0 16px" }}>
-            <Breadcrumb style={{ margin: "16px 0" }}>
-              <Breadcrumb.Item>User</Breadcrumb.Item>
-              <Breadcrumb.Item>Bill</Breadcrumb.Item>
-            </Breadcrumb>
             <div
               className="site-layout-background"
               style={{
@@ -103,6 +98,7 @@ const DashboardPage = () => {
               }}
             >
               <Switch>
+                <Route exact path="/ticketsList" component={TicketsList} />
                 <Route exact path="/itemsType" component={PieChart} />
                 <Route
                   exact
