@@ -24,6 +24,7 @@ import PieChartStatus from "../components/PieChartStatus";
 import NotFoundPage from "./NotFoundPage";
 const { Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
+
 const DashboardPage = () => {
   const [collapsed, setCollapsed] = useState(false);
   const onCollapse = () => {
