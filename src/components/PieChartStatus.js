@@ -13,14 +13,16 @@ const PieChartStatus = () => {
       try {
         const result = await api.get(`/ticket`);
         const status = result.data.data;
-        const doneStatus = status.filter((status) => status.status === "done");
+        const doneStatus = status.filter(
+          (status) => status.status === "Hoàn Thành"
+        );
         console.log("done", doneStatus);
         const inProgressStatus = status.filter(
-          (status) => status.status === "in progress"
+          (status) => status.status === "Đang gửi"
         );
         console.log("inProgress", inProgressStatus);
         const notProcessedStatus = status.filter(
-          (status) => status.status === "not processed"
+          (status) => status.status === "Chưa gửi"
         );
         console.log("notProcessed", notProcessedStatus);
         setDone(doneStatus);
@@ -33,16 +35,12 @@ const PieChartStatus = () => {
     getStatusDetail();
   }, []);
   const data = {
-    labels: ["Not Processed", "In Progress", "Done"],
+    labels: ["Chưa gửi", "Đang gửi", "Hoàn thành"],
     datasets: [
       {
-        label: "Status",
+        label: "Tình Trạng",
         data: [notProcessed.length, inProgress.length, done.length],
-        backgroundColor: [
-          "#F7464A",
-          `rgba(0, 148, 247, 0.7)`,
-          "rgba(247, 222, 0, 0.7)",
-        ],
+        backgroundColor: ["#F7464A", "#46BFBD", "rgba(247, 222, 0, 0.7)"],
         borderWidth: 1,
       },
     ],
@@ -52,7 +50,7 @@ const PieChartStatus = () => {
     <div>
       {" "}
       <div className="header">
-        <h1 className="title">Tickets on Status</h1>
+        <h1 className="title">Tình trạng các phiếu hỗ trợ</h1>
       </div>
       <div style={{ width: "30vw", border: "1px solid black" }}>
         <Pie data={data} />

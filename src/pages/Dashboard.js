@@ -25,6 +25,7 @@ import NotFoundPage from "./NotFoundPage";
 import TicketsList from "../components/TicketsList";
 const { Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
+
 const DashboardPage = () => {
   const [collapsed, setCollapsed] = useState(false);
   const onCollapse = () => {
