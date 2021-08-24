@@ -1,9 +1,7 @@
-import { Layout, Menu, Breadcrumb } from "antd";
+import { Layout, Menu } from "antd";
 import {
-  DesktopOutlined,
   PieChartOutlined,
   LineChartOutlined,
-  FileOutlined,
   TeamOutlined,
   UserOutlined,
   OrderedListOutlined,
@@ -16,7 +14,6 @@ import BarChart from "../components/BarChart";
 import LineChart from "../components/LineChart";
 import PieChart from "../components/PieChart";
 import PieChartStatus from "../components/PieChartStatus";
-import NotFoundPage from "./NotFoundPage";
 import TicketsList from "../components/TicketsList";
 const { Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;

@@ -1,13 +1,6 @@
 import "./App.css";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import DashboardPage from "./pages/Dashboard";
-import NotFoundPage from "./pages/NotFoundPage";
-import TicketsList from "./components/TicketsList";
-import PieChart from "./components/PieChart";
-import PieChartStatus from "./components/PieChartStatus";
-import BarChart from "./components/BarChart";
-import LineChart from "./components/LineChart";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
