@@ -1,73 +1,12 @@
-import { Table } from "antd";
+import { Col, Row, Table } from "antd";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Row, Col, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { Line } from "react-chartjs-2";
 import api from "../redux/axios";
 
 const LineChart = () => {
   const [tickets, setTickets] = useState([]);
-  const columns = [
-    {
-      title: "Date",
-      dataIndex: "date",
-    },
-    {
-      title: "Not Processed",
-      dataIndex: "notprocessed",
-      sorter: {
-        compare: (a, b) => a.chinese - b.chinese,
-        multiple: 1,
-      },
-    },
-    {
-      title: "In Progress",
-      dataIndex: "inprogress",
-      sorter: {
-        compare: (a, b) => a.math - b.math,
-        multiple: 1,
-      },
-    },
-    {
-      title: "Done",
-      dataIndex: "done",
-      sorter: {
-        compare: (a, b) => a.english - b.english,
-        multiple: 1,
-      },
-    },
-  ];
-
-  const tableData = [
-    {
-      key: "1",
-      name: "John Brown",
-      chinese: 98,
-      math: 60,
-      english: 70,
-    },
-    {
-      key: "2",
-      name: "Jim Green",
-      chinese: 98,
-      math: 66,
-      english: 89,
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      chinese: 98,
-      math: 90,
-      english: 70,
-    },
-    {
-      key: "4",
-      name: "Jim Red",
-      chinese: 88,
-      math: 99,
-      english: 89,
-    },
-  ];
   const [notProcessed, setNotProcessed] = useState({
     monday: 0,
     tuesday: 0,
@@ -95,16 +34,66 @@ const LineChart = () => {
     saturday: 0,
     sunday: 0,
   });
+  const columns = [
+    {
+      title: "Date",
+      dataIndex: "date",
+      align: "center",
+    },
+    {
+      title: "Not Processed",
+      dataIndex: "notprocessed",
+      align: "center",
+      width: "20px",
+      sorter: {
+        compare: (a, b) => a.notprocessed - b.notprocessed,
+        multiple: 1,
+      },
+    },
+    {
+      title: "In Progress",
+      dataIndex: "inprogress",
+      align: "center",
+      width: "10px",
+
+      sorter: {
+        compare: (a, b) => a.inprogress - b.inprogress,
+        multiple: 1,
+      },
+    },
+    {
+      title: "Done",
+      dataIndex: "done",
+      align: "center",
+      sorter: {
+        compare: (a, b) => a.done - b.done,
+        multiple: 1,
+      },
+    },
+  ];
+  const dateArray = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  const tableArray = ["1", "2", "3", "4", "5", "6", "7"];
+  const tableData = tableArray.map((data, idx) => {
+    let result = {
+      key: data,
+      date: dateArray[idx],
+      notprocessed: notProcessed[dateArray[idx].toLowerCase()],
+      inprogress: inProgress[dateArray[idx].toLowerCase()],
+      done: done[dateArray[idx].toLowerCase()],
+    };
+    return result;
+  });
+
   const data = {
-    labels: [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ],
+    labels: dateArray,
     datasets: [
       {
         label: "Not Processed",
@@ -303,18 +292,19 @@ const LineChart = () => {
           <h1 className="title">Tickets Requested Per Date</h1>
         </div>
         <Row style={{ width: "100%" }}>
-          <Col lg={4}>
-            {" "}
+          <Col lg={8} style={{ display: "flex", alignItems: "center" }}>
             <Table
+              size={"small"}
               columns={columns}
               dataSource={tableData}
               pagination={false}
               onChange={onChange}
-            />{" "}
+            />
           </Col>
-          <Col lg={8}>
+          <Col md={0} lg={1}></Col>
+          <Col lg={15}>
             <div className="header" style={{ border: "1px solid black" }}>
-              <Line data={data} />
+              <Line responsive={true} data={data} />
             </div>
           </Col>
         </Row>
