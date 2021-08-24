@@ -181,6 +181,19 @@ const BarChart = () => {
       </div>
 
       {/* Customized districts */}
+      
+
+      <div
+        style={{
+          width: "80%",
+          border: "1px solid black",
+          marginBottom: "2%",
+          marginTop: "3%",
+        }}
+      >
+        <Bar data={dataBar} />
+      </div>
+
       <div
         style={{
           border: "1px solid green",
@@ -188,7 +201,7 @@ const BarChart = () => {
           width: "80%",
           textAlign: "center",
         }}
-      >
+      > Filter by:
         <Checkbox
           indeterminate={indeterminate}
           onChange={onCheckAllChange}
@@ -202,19 +215,8 @@ const BarChart = () => {
           value={checkedList}
           onChange={onChange}
         />
-      </div>
 
-      <div
-        style={{
-          width: "100%",
-          border: "1px solid black",
-          marginBottom: "5%",
-          marginTop: "3%",
-        }}
-      >
-        <Bar data={dataBar} />
       </div>
-
       {/* Table */}
       <Table
         columns={columns}
