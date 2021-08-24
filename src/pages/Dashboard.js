@@ -25,6 +25,7 @@ import NotFoundPage from "./NotFoundPage";
 import TicketsList from "../components/TicketsList";
 const { Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
+
 const DashboardPage = () => {
   const [collapsed, setCollapsed] = useState(false);
   const onCollapse = () => {
@@ -99,14 +100,10 @@ const DashboardPage = () => {
               <Switch>
                 <Route exact path="/ticketsList" component={TicketsList} />
                 <Route exact path="/itemsType" component={PieChart} />
-                <Route
-                  exact
-                  path="/ticketsDistrict"
-                  component={PieChartStatus}
-                />
-                <Route exact path="/ticketsStatus" component={BarChart} />
+                <Route exact path="/ticketsDistrict" component={BarChart}/>
+                <Route exact path="/ticketsStatus" component={PieChartStatus} />
                 <Route exact path="/ticketsDate" component={LineChart} />
-                <Route exact path="/dashboard" component={NotFoundPage} />
+                {/* <Route component={NotFoundPage} /> */}
               </Switch>
             </div>
           </Content>
