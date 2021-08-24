@@ -13,16 +13,16 @@ const PieChartStatus = () => {
       try {
         const result = await api.get(`/ticket`);
         const status = result.data.data;
-        const doneStatus = status.filter((status) => status.status === "done");
-        console.log("done", doneStatus);
+        const doneStatus = status.filter((status) => status.status == "done");
+     
         const inProgressStatus = status.filter(
           (status) => status.status === "in progress"
         );
-        console.log("inProgress", inProgressStatus);
+       
         const notProcessedStatus = status.filter(
           (status) => status.status === "not processed"
         );
-        console.log("notProcessed", notProcessedStatus);
+       
         setDone(doneStatus);
         setInProgress(inProgressStatus);
         setNotProcessed(notProcessedStatus);
