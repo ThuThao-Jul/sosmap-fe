@@ -16,8 +16,9 @@ const BarChart = () => {
        let detailData = {"district": district, "notProcessed": notProcessed, "inProgress": inProgress, "done": done};
        districtData.push(detailData);
     }
-
-    console.log(districtData)
+   
+    
+   console.log(districtData)
 
     const data = {
         labels: districtData.map((d) => d.district),
