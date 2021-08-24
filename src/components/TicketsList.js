@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import api from "../redux/axios";
 import { Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { link } from "fs";
 
 const TicketsList = () => {
   const [ticketList, setTicketList] = useState();
@@ -37,15 +36,15 @@ const TicketsList = () => {
                   {t.items.map((items) => (
                     <li>
                       {items.name}:{" "}
-                      {items.name == "Mì Gói" ? (
+                      {items.name === "Mì Gói" ? (
                         <span>{items.quantity + " thùng"}</span>
-                      ) : items.name == "Trứng" ? (
+                      ) : items.name === "Trứng" ? (
                         <span>{items.quantity + " vỉ"}</span>
-                      ) : items.name == "Gạo" ? (
+                      ) : items.name === "Gạo" ? (
                         <span>{items.quantity + " kg"}</span>
-                      ) : items.name == "Sữa" ? (
+                      ) : items.name === "Sữa" ? (
                         <span>{items.quantity + " lốc"}</span>
-                      ) : items.name == "Quần Áo" ? (
+                      ) : items.name === "Quần Áo" ? (
                         <span>{items.quantity + " bộ"}</span>
                       ) : (
                         <span>{items.quantity + " chai"}</span>

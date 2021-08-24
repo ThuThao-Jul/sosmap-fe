@@ -3,7 +3,6 @@ import { Pie } from "react-chartjs-2";
 import api from "../redux/axios";
 
 const PieChartStatus = () => {
-  // const [status, setStatus] = useState([]);
   const [notProcessed, setNotProcessed] = useState([]);
   const [inProgress, setInProgress] = useState([]);
   const [done, setDone] = useState([]);
@@ -20,11 +19,11 @@ const PieChartStatus = () => {
         const inProgressStatus = status.filter(
           (status) => status.status === "Đang gửi"
         );
-        console.log("inProgress", inProgressStatus);
+
         const notProcessedStatus = status.filter(
           (status) => status.status === "Chưa gửi"
         );
-        console.log("notProcessed", notProcessedStatus);
+
         setDone(doneStatus);
         setInProgress(inProgressStatus);
         setNotProcessed(notProcessedStatus);
