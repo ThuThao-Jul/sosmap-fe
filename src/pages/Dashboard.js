@@ -46,14 +46,7 @@ const DashboardPage = () => {
                 icon={<OrderedListOutlined />}
                 style={{ paddingLeft: "32px", fontSize: "12px" }}
               >
-                <Link to="ticketsList"> Tickets List </Link>
-              </Menu.Item>
-              <Menu.Item
-                style={{ paddingLeft: "32px", fontSize: "12px" }}
-                icon={<PieChartOutlined />}
-                key="3"
-              >
-                <Link to="itemsType"> Items Per Types </Link>
+                <Link to="/"> Tickets List </Link>
               </Menu.Item>
               <Menu.Item
                 style={{ paddingLeft: "32px", fontSize: "12px" }}
@@ -76,6 +69,13 @@ const DashboardPage = () => {
               >
                 <Link to="ticketsStatus"> Tickets Per Status</Link>
               </Menu.Item>
+              <Menu.Item
+                style={{ paddingLeft: "32px", fontSize: "12px" }}
+                icon={<PieChartOutlined />}
+                key="3"
+              >
+                <Link to="itemsType"> Items Per Types </Link>
+              </Menu.Item>
             </SubMenu>
             <SubMenu key="sub2" icon={<TeamOutlined />} title="Team"></SubMenu>
           </Menu>
@@ -94,7 +94,7 @@ const DashboardPage = () => {
               }}
             >
               <Switch>
-                <Route exact path="/ticketsList" component={TicketsList} />
+                <Route exact path="/" component={TicketsList} />
                 <Route exact path="/itemsType" component={PieChart} />
                 <Route exact path="/ticketsDistrict" component={BarChart} />
                 <Route exact path="/ticketsStatus" component={PieChartStatus} />

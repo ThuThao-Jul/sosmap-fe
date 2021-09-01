@@ -272,10 +272,7 @@ const LineChart = () => {
     dispatch(ticketActions.getTickets());
     getTickets();
   }, []);
-  console.log(tickets);
-  console.log(done);
-  console.log(inProgress);
-  console.log(notProcessed);
+
   return (
     <>
       <Container
@@ -290,7 +287,7 @@ const LineChart = () => {
           className="header"
           style={{ textAlign: "center", marginBottom: "40px" }}
         >
-          <h1 className="title">Tickets Requested Per Date</h1>
+          <h1 className="title">Tickets Per Date</h1>
         </div>
         <Row style={{ width: "100%" }}>
           <Col lg={8} style={{ display: "flex", alignItems: "center" }}>

@@ -32,7 +32,6 @@ const BarChart = () => {
     };
     districtData.push(detailData);
   }
-  console.log(districtData);
   const plainOptions = districtData.map((d) => d.district);
   const defaultCheckedList = districtData.map((d) => d.district);
   const [checkedList, setCheckedList] = useState(defaultCheckedList);
@@ -42,7 +41,6 @@ const BarChart = () => {
   const checkedData = districtData.filter((i) =>
     checkedList.includes(i.district)
   );
-  console.log(checkedData);
   const dataBar = {
     labels: checkedList,
     datasets: [

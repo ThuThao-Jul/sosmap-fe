@@ -19,6 +19,7 @@ const ticketReducer = (state = initialState, action) => {
         data: payload,
       };
     case types.GET_ALL_TICKETS_FAILURE:
+
       return {
         ...state,
       };
